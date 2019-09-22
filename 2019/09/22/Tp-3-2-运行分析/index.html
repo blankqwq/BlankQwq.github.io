@@ -64,31 +64,35 @@
   };
 </script>
 
-  <meta name="description" content="直到最后他才说了认输">
-<meta property="og:type" content="website">
-<meta property="og:title" content="blankqwq">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="初步介绍thinkphp的运行模式等">
+<meta name="keywords" content="thinkphp,php,framework,mvc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tp 3.2 运行分析">
+<meta property="og:url" content="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/index.html">
 <meta property="og:site_name" content="blankqwq">
-<meta property="og:description" content="直到最后他才说了认输">
+<meta property="og:description" content="初步介绍thinkphp的运行模式等">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/images/tp3.2-desc.png">
+<meta property="og:updated_time" content="2019-09-22T06:09:50.062Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="blankqwq">
-<meta name="twitter:description" content="直到最后他才说了认输">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="Tp 3.2 运行分析">
+<meta name="twitter:description" content="初步介绍thinkphp的运行模式等">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/images/tp3.2-desc.png">
+  <link rel="canonical" href="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>blankqwq</title>
+  <title>Tp 3.2 运行分析 | blankqwq</title>
   
 
 
@@ -259,109 +263,13 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/关于/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="blankqwq">
-      <meta itemprop="description" content="直到最后他才说了认输">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blankqwq">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/22/关于/" class="post-title-link" itemprop="url">关于</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-09-22 11:16:15" itemprop="dateCreated datePublished" datetime="2019-09-22T11:16:15+08:00">2019-09-22</time>
-            </span>
-          
-
-          
-            <span id="/2019/09/22/关于/" class="post-meta-item leancloud_visitors" data-flag-title="关于" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>0</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -374,9 +282,8 @@
       <meta itemprop="name" content="blankqwq">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/22/Tp-3-2-运行分析/" class="post-title-link" itemprop="url">Tp 3.2 运行分析</a>
+        <h1 class="post-title" itemprop="name headline">Tp 3.2 运行分析
+
           
         </h1>
 
@@ -406,6 +313,14 @@
               </span>
               <span class="post-meta-item-text">阅读次数：</span>
               <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
           
           <br>
@@ -439,39 +354,144 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
+        <blockquote>
 <p>初步介绍thinkphp的运行模式等</p>
+</blockquote><a id="more"></a>
+<h1 id="think-3-2-文件逐层进入"><a href="#think-3-2-文件逐层进入" class="headerlink" title="think 3.2 文件逐层进入"></a>think 3.2 文件逐层进入</h1><pre><code>让我们一起进入thinkphp的设计方式
+
+看看3.2性能为什么那么强大[仅仅一部分]
+        - 路由等非常迅速
+        - 但是遇到数据库操作[关联关系n+1问题]
+
+有什么可取之处
+又有什么需要避免的地方
+
+
+优点：
+    tp3.2与ssh非常相似
+    所以采用java的开发思路去开发tp是非常舒服的
+
+
+    还有诸多可以优化的地方  
+    --&gt;     1.优化框架n+1问题
+    --&gt;     2.解决一些其他耗时性能问题
+    使得框架更有利于快速开发
+
+    本次实践
+    发现虽然很多轮子都需要手动找或者自己做
+        但是,解决了一些很久以前没使用过的底层问题
+
+    注重过程
+
+缺点：
+
+    但是tp3.2 我认为性能并不是特别的强势
+    [很多地方仍然可以优化]</code></pre><h2 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件</h2><blockquote>
+<p><code>index.php</code> 定义一些基础-&gt;引入引导文件</p>
 </blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/09/22/Tp-3-2-运行分析/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false</span><br><span class="line">define(&apos;APP_DEBUG&apos;,True);</span><br><span class="line">//默认模块</span><br><span class="line">define(&apos;BIND_MODULE&apos;,&apos;Home&apos;);</span><br><span class="line">//应用目录</span><br><span class="line">define(&apos;APP_PATH&apos;,&apos;./Application/&apos;);</span><br><span class="line">//引入核心文件</span><br><span class="line">require &quot;./ThinkPHP/ThinkPHP.php&quot;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="引导运行文件"><a href="#引导运行文件" class="headerlink" title="引导运行文件"></a>引导运行文件</h2><blockquote>
+<p> <code>ThinkPHP.php</code>入口文件解析 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 记录开始运行时间</span><br><span class="line"></span><br><span class="line">$GLOBALS[&apos;_beginTime&apos;] = microtime(TRUE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if(!IS_CLI) &#123;</span><br><span class="line"></span><br><span class="line">    // 当前文件名</span><br><span class="line"></span><br><span class="line">    if(!defined(&apos;_PHP_FILE_&apos;)) &#123;</span><br><span class="line"></span><br><span class="line">        if(IS_CGI) &#123;</span><br><span class="line"></span><br><span class="line">            //CGI/FASTCGI模式下</span><br><span class="line"></span><br><span class="line">            $_temp  = explode(&apos;.php&apos;,$_SERVER[&apos;PHP_SELF&apos;]);</span><br><span class="line"></span><br><span class="line">            define(&apos;_PHP_FILE_&apos;,    rtrim(str_replace($_SERVER[&apos;HTTP_HOST&apos;],&apos;&apos;,$_temp[0].&apos;.php&apos;),&apos;/&apos;));</span><br><span class="line"></span><br><span class="line">        &#125;else &#123;</span><br><span class="line"></span><br><span class="line">            define(&apos;_PHP_FILE_&apos;,    rtrim($_SERVER[&apos;SCRIPT_NAME&apos;],&apos;/&apos;));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(!defined(&apos;__ROOT__&apos;)) &#123;</span><br><span class="line">        $_root  =   rtrim(dirname(_PHP_FILE_),&apos;/&apos;);</span><br><span class="line">        define(&apos;__ROOT__&apos;,  (($_root==&apos;/&apos; || $_root==&apos;\\&apos;)?&apos;&apos;:$_root));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">// 加载核心Think类  </span><br><span class="line">// CORE_PATH ==&gt; Library/Think/Think.vlass.php</span><br><span class="line">require CORE_PATH.&apos;Think&apos;.EXT;</span><br><span class="line">//开始引导运行</span><br><span class="line">Think\Think::start();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Think-核心类"><a href="#Think-核心类" class="headerlink" title="Think 核心类"></a>Think 核心类</h2><blockquote>
+<p>Think.class.php 引导结构</p>
+</blockquote>
+<p><img src="./images/tp3.2-desc.png" alt="image"></p>
+<h2 id="性能缺点分析"><a href="#性能缺点分析" class="headerlink" title="性能缺点分析"></a>性能缺点分析</h2><pre><code>todo</code></pre><h2 id="解耦合"><a href="#解耦合" class="headerlink" title="解耦合"></a>解耦合</h2><pre><code>todo</code></pre>
     </div>
 
     
     
     
+        
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="blankqwq 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="blankqwq 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>blankqwq</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/" title="Tp 3.2 运行分析">http://yoursite.com/2019/09/22/Tp-3-2-运行分析/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/thinkphp/" rel="tag"># thinkphp</a>
+            
+              <a href="/tags/php/" rel="tag"># php</a>
+            
+              <a href="/tags/framework/" rel="tag"># framework</a>
+            
+              <a href="/tags/mvc/" rel="tag"># mvc</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/22/关于/" rel="prev" title="关于">
+                  关于 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
   </div>
-
-  
 
 
           </div>
@@ -490,6 +510,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -502,6 +527,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#think-3-2-文件逐层进入"><span class="nav-text">think 3.2 文件逐层进入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入口文件"><span class="nav-text">入口文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导运行文件"><span class="nav-text">引导运行文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Think-核心类"><span class="nav-text">Think 核心类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能缺点分析"><span class="nav-text">性能缺点分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解耦合"><span class="nav-text">解耦合</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
