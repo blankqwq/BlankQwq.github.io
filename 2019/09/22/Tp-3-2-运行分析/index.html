@@ -64,20 +64,20 @@
   };
 </script>
 
-  <meta name="description" content="初步介绍thinkphp的运行模式等">
+  <meta name="description" content="初步介绍thinkphp的运行模式以及基本流程">
 <meta name="keywords" content="thinkphp,php,framework,mvc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tp 3.2 运行分析">
+<meta property="og:title" content="Tp 3.2 运行分析 1 初步认识篇">
 <meta property="og:url" content="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/index.html">
 <meta property="og:site_name" content="blankqwq">
-<meta property="og:description" content="初步介绍thinkphp的运行模式等">
+<meta property="og:description" content="初步介绍thinkphp的运行模式以及基本流程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/images/tp3.2-desc.png">
-<meta property="og:updated_time" content="2019-09-22T06:09:50.062Z">
+<meta property="og:image" content="https://i.loli.net/2019/09/22/WaEfTOSdCDtl471.png">
+<meta property="og:updated_time" content="2019-09-22T06:29:02.756Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tp 3.2 运行分析">
-<meta name="twitter:description" content="初步介绍thinkphp的运行模式等">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/images/tp3.2-desc.png">
+<meta name="twitter:title" content="Tp 3.2 运行分析 1 初步认识篇">
+<meta name="twitter:description" content="初步介绍thinkphp的运行模式以及基本流程">
+<meta name="twitter:image" content="https://i.loli.net/2019/09/22/WaEfTOSdCDtl471.png">
   <link rel="canonical" href="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/">
 
 
@@ -92,7 +92,7 @@
   };
 </script>
 
-  <title>Tp 3.2 运行分析 | blankqwq</title>
+  <title>Tp 3.2 运行分析 1 初步认识篇 | blankqwq</title>
   
 
 
@@ -282,7 +282,7 @@
       <meta itemprop="name" content="blankqwq">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Tp 3.2 运行分析
+        <h1 class="post-title" itemprop="name headline">Tp 3.2 运行分析 1 初步认识篇
 
           
         </h1>
@@ -298,7 +298,7 @@
                 
               
 
-              <time title="创建时间：2019-09-22 11:06:40 / 修改时间：14:09:50" itemprop="dateCreated datePublished" datetime="2019-09-22T11:06:40+08:00">2019-09-22</time>
+              <time title="创建时间：2019-09-22 11:06:40 / 修改时间：14:29:02" itemprop="dateCreated datePublished" datetime="2019-09-22T11:06:40+08:00">2019-09-22</time>
             </span>
           
             
@@ -307,7 +307,7 @@
           
 
           
-            <span id="/2019/09/22/Tp-3-2-运行分析/" class="post-meta-item leancloud_visitors" data-flag-title="Tp 3.2 运行分析" title="阅读次数">
+            <span id="/2019/09/22/Tp-3-2-运行分析/" class="post-meta-item leancloud_visitors" data-flag-title="Tp 3.2 运行分析 1 初步认识篇" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.7k</span>
+              <span>1.5k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
           
 
@@ -355,7 +355,7 @@
 
       
         <blockquote>
-<p>初步介绍thinkphp的运行模式等</p>
+<p>初步介绍thinkphp的运行模式以及基本流程</p>
 </blockquote><a id="more"></a>
 <h1 id="think-3-2-文件逐层进入"><a href="#think-3-2-文件逐层进入" class="headerlink" title="think 3.2 文件逐层进入"></a>think 3.2 文件逐层进入</h1><pre><code>让我们一起进入thinkphp的设计方式
 
@@ -389,17 +389,17 @@
     [很多地方仍然可以优化]</code></pre><h2 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件</h2><blockquote>
 <p><code>index.php</code> 定义一些基础-&gt;引入引导文件</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false</span><br><span class="line">define(&apos;APP_DEBUG&apos;,True);</span><br><span class="line">//默认模块</span><br><span class="line">define(&apos;BIND_MODULE&apos;,&apos;Home&apos;);</span><br><span class="line">//应用目录</span><br><span class="line">define(&apos;APP_PATH&apos;,&apos;./Application/&apos;);</span><br><span class="line">//引入核心文件</span><br><span class="line">require &quot;./ThinkPHP/ThinkPHP.php&quot;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false</span></span><br><span class="line">define(<span class="string">'APP_DEBUG'</span>,<span class="keyword">True</span>);</span><br><span class="line"><span class="comment">//默认模块</span></span><br><span class="line">define(<span class="string">'BIND_MODULE'</span>,<span class="string">'Home'</span>);</span><br><span class="line"><span class="comment">//应用目录</span></span><br><span class="line">define(<span class="string">'APP_PATH'</span>,<span class="string">'./Application/'</span>);</span><br><span class="line"><span class="comment">//引入核心文件</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">"./ThinkPHP/ThinkPHP.php"</span>;</span><br></pre></td></tr></table></figure>
 
 <h2 id="引导运行文件"><a href="#引导运行文件" class="headerlink" title="引导运行文件"></a>引导运行文件</h2><blockquote>
 <p> <code>ThinkPHP.php</code>入口文件解析 </p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 记录开始运行时间</span><br><span class="line"></span><br><span class="line">$GLOBALS[&apos;_beginTime&apos;] = microtime(TRUE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if(!IS_CLI) &#123;</span><br><span class="line"></span><br><span class="line">    // 当前文件名</span><br><span class="line"></span><br><span class="line">    if(!defined(&apos;_PHP_FILE_&apos;)) &#123;</span><br><span class="line"></span><br><span class="line">        if(IS_CGI) &#123;</span><br><span class="line"></span><br><span class="line">            //CGI/FASTCGI模式下</span><br><span class="line"></span><br><span class="line">            $_temp  = explode(&apos;.php&apos;,$_SERVER[&apos;PHP_SELF&apos;]);</span><br><span class="line"></span><br><span class="line">            define(&apos;_PHP_FILE_&apos;,    rtrim(str_replace($_SERVER[&apos;HTTP_HOST&apos;],&apos;&apos;,$_temp[0].&apos;.php&apos;),&apos;/&apos;));</span><br><span class="line"></span><br><span class="line">        &#125;else &#123;</span><br><span class="line"></span><br><span class="line">            define(&apos;_PHP_FILE_&apos;,    rtrim($_SERVER[&apos;SCRIPT_NAME&apos;],&apos;/&apos;));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(!defined(&apos;__ROOT__&apos;)) &#123;</span><br><span class="line">        $_root  =   rtrim(dirname(_PHP_FILE_),&apos;/&apos;);</span><br><span class="line">        define(&apos;__ROOT__&apos;,  (($_root==&apos;/&apos; || $_root==&apos;\\&apos;)?&apos;&apos;:$_root));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">// 加载核心Think类  </span><br><span class="line">// CORE_PATH ==&gt; Library/Think/Think.vlass.php</span><br><span class="line">require CORE_PATH.&apos;Think&apos;.EXT;</span><br><span class="line">//开始引导运行</span><br><span class="line">Think\Think::start();</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录开始运行时间</span></span><br><span class="line"></span><br><span class="line">$GLOBALS[<span class="string">'_beginTime'</span>] = microtime(<span class="keyword">TRUE</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!IS_CLI) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当前文件名</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!defined(<span class="string">'_PHP_FILE_'</span>)) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(IS_CGI) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//CGI/FASTCGI模式下</span></span><br><span class="line"></span><br><span class="line">            $_temp  = explode(<span class="string">'.php'</span>,$_SERVER[<span class="string">'PHP_SELF'</span>]);</span><br><span class="line"></span><br><span class="line">            define(<span class="string">'_PHP_FILE_'</span>,    rtrim(str_replace($_SERVER[<span class="string">'HTTP_HOST'</span>],<span class="string">''</span>,$_temp[<span class="number">0</span>].<span class="string">'.php'</span>),<span class="string">'/'</span>));</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            define(<span class="string">'_PHP_FILE_'</span>,    rtrim($_SERVER[<span class="string">'SCRIPT_NAME'</span>],<span class="string">'/'</span>));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!defined(<span class="string">'__ROOT__'</span>)) &#123;</span><br><span class="line">        $_root  =   rtrim(dirname(_PHP_FILE_),<span class="string">'/'</span>);</span><br><span class="line">        define(<span class="string">'__ROOT__'</span>,  (($_root==<span class="string">'/'</span> || $_root==<span class="string">'\\'</span>)?<span class="string">''</span>:$_root));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 加载核心Think类  </span></span><br><span class="line"><span class="comment">// CORE_PATH ==&gt; Library/Think/Think.vlass.php</span></span><br><span class="line"><span class="keyword">require</span> CORE_PATH.<span class="string">'Think'</span>.EXT;</span><br><span class="line"><span class="comment">//开始引导运行</span></span><br><span class="line">Think\Think::start();</span><br></pre></td></tr></table></figure>
 
 <h2 id="Think-核心类"><a href="#Think-核心类" class="headerlink" title="Think 核心类"></a>Think 核心类</h2><blockquote>
 <p>Think.class.php 引导结构</p>
 </blockquote>
-<p><img src="./images/tp3.2-desc.png" alt="image"></p>
+<p><img src="https://i.loli.net/2019/09/22/WaEfTOSdCDtl471.png" alt="tp3.2-desc.png"></p>
 <h2 id="性能缺点分析"><a href="#性能缺点分析" class="headerlink" title="性能缺点分析"></a>性能缺点分析</h2><pre><code>todo</code></pre><h2 id="解耦合"><a href="#解耦合" class="headerlink" title="解耦合"></a>解耦合</h2><pre><code>todo</code></pre>
     </div>
 
@@ -439,7 +439,7 @@
     <strong>本文作者： </strong>blankqwq</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/" title="Tp 3.2 运行分析">http://yoursite.com/2019/09/22/Tp-3-2-运行分析/</a>
+    <a href="http://yoursite.com/2019/09/22/Tp-3-2-运行分析/" title="Tp 3.2 运行分析 1 初步认识篇">http://yoursite.com/2019/09/22/Tp-3-2-运行分析/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -534,6 +534,9 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="blankqwq">
   <p class="site-author-name" itemprop="name">blankqwq</p>
   <div class="site-description" itemprop="description">直到最后他才说了认输</div>
 </div>
@@ -599,7 +602,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2 分钟</span>
+    <span title="站点阅读时长">1 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
