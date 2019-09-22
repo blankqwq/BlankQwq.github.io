@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="初生牛犊不怕虎,直接莽上laravels">
+<meta name="keywords" content="framework,laravel,laravels,laravel-admin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel-admin在laravel-admin下运行——记一次因为莽付出的代价">
+<meta property="og:url" content="http://yoursite.com/2019/09/22/laravel-admin在laravel-admin下运行——记一次因为莽付出的代价/index.html">
+<meta property="og:site_name" content="blankqwq">
+<meta property="og:description" content="初生牛犊不怕虎,直接莽上laravels">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/peJ1oswJgm.jpg!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/LfN53diEDf.jpg!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/tyio36wkkD.jpg!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/rhNkAZSJ2t.png!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/bOCutUPAXZ.png!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/GPi9iLMekg.png!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/jMRwTzgnRg.png!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/zOtZsewPuu.png!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/JvCwNzii7a.jpg!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/kGTCROO7Pe.jpg!/fw/1240">
+<meta property="og:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/1mCWY5nTni.jpg!/fw/1240">
+<meta property="og:updated_time" content="2019-09-22T07:14:45.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="laravel-admin在laravel-admin下运行——记一次因为莽付出的代价">
+<meta name="twitter:description" content="初生牛犊不怕虎,直接莽上laravels">
+<meta name="twitter:image" content="https://cdn.learnku.com/uploads/images/201909/07/25840/peJ1oswJgm.jpg!/fw/1240">
+  <link rel="canonical" href="http://yoursite.com/2019/09/22/laravel-admin在laravel-admin下运行——记一次因为莽付出的代价/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>laravel-admin在laravel-admin下运行——记一次因为莽付出的代价 | blankqwq</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">blankqwq</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">记录学习之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/laravel-admin在laravel-admin下运行——记一次因为莽付出的代价/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="blankqwq">
+      <meta itemprop="description" content="直到最后他才说了认输">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blankqwq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">laravel-admin在laravel-admin下运行——记一次因为莽付出的代价
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-22 15:11:00 / 修改时间：15:14:45" itemprop="dateCreated datePublished" datetime="2019-09-22T15:11:00+08:00">2019-09-22</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/09/22/laravel-admin在laravel-admin下运行——记一次因为莽付出的代价/" class="post-meta-item leancloud_visitors" data-flag-title="laravel-admin在laravel-admin下运行——记一次因为莽付出的代价" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>7 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>初生牛犊不怕虎,直接莽上laravels</p>
+</blockquote><a id="more"></a>
+<blockquote>
+<p>前因</p>
+</blockquote>
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/peJ1oswJgm.jpg!/fw/1240" width="100" height="100">
+
+<p>我们公司一直都是采用 <strong>think3.2</strong> ，虽然使用起来确实不错,但是哪能有 laravel 舒服</p>
+<p>于是我才用 laravel ，但是经理觉得后台太慢了</p>
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/LfN53diEDf.jpg!/fw/1240" width="100" height="100">
+
+<p>我做了一部分<strong>优化</strong>还是慢，<strong>我太难了</strong>，之前他让我随便选框架</p>
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/tyio36wkkD.jpg!/fw/1240" width="100" height="100">
+我就想到了大佬的  [laravels](https://github.com/hhxsv5/laravel-s) 心里想laravels+laravel-admin岂不是美哉，毕竟有swoole `以前学过一些，觉得应该可以把持住`
+
+<blockquote>
+<p> 结果一使用出<code>大问题</code></p>
+</blockquote>
+<h2 id="发现问题，问题介绍"><a href="#发现问题，问题介绍" class="headerlink" title="发现问题，问题介绍"></a>发现问题，问题介绍</h2><ol>
+<li>第一个问题就是比较常见的，顶部的刷新无限增多，如图</li>
+</ol>
+<p><img src="https://cdn.learnku.com/uploads/images/201909/07/25840/rhNkAZSJ2t.png!/fw/1240" alt="laravel-admin在Laravels运行的的一些问题解析——记一次因为莽而付出的代价"></p>
+<ol start="2">
+<li>第二个问题就是，删除<code>这个</code>却进入上一个进入的删除路由，导致各种删除失败</li>
+</ol>
+<p><img src="https://cdn.learnku.com/uploads/images/201909/07/25840/bOCutUPAXZ.png!/fw/1240" alt="laravel-admin在Laravels运行的的一些问题解析——记一次因为莽而付出的代价"></p>
+<ol start="3">
+<li>导出excel提示exit</li>
+</ol>
+<p>4.Pjax中间件提示exit </p>
+<blockquote>
+<p>目前比较<code>真实</code>的问题就是这么一些，具体其他问题请等待我后续的发现</p>
+</blockquote>
+<h2 id="解决问题，提供思路"><a href="#解决问题，提供思路" class="headerlink" title="解决问题，提供思路"></a>解决问题，提供思路</h2><blockquote>
+<p>授人以鱼不如授人以渔</p>
+</blockquote>
+<p>我们先排查第一个问题，这个比较常见，其实就是我们的<code>Admin</code>实例并没有被清除，导致无限添加navBar</p>
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/GPi9iLMekg.png!/fw/1240" width="200" height="100">
+
+<p>然后在 <code>admin/bootstrap.php</code>中每次都调用一下</p>
+<blockquote>
+<p>于是我想到第一个办法，这个方法比较 <code>憨批</code> ，因为当时认为这个实例重新创建应该挺麻烦，所以采用局部清理的方式</p>
+</blockquote>
+<blockquote>
+<p>解决问题之后测试删除功能，又发现新的问题，也就是<code>问题2</code></p>
+</blockquote>
+<p><img src="https://cdn.learnku.com/uploads/images/201909/07/25840/jMRwTzgnRg.png!/fw/1240" alt="laravel-admin在Laravels运行的的一些问题解析——记一次因为莽而付出的代价"></p>
+<p><img src="https://cdn.learnku.com/uploads/images/201909/07/25840/zOtZsewPuu.png!/fw/1240" alt="laravel-admin在Laravels运行的的一些问题解析——记一次因为莽而付出的代价"></p>
+<p>这个问题很明显是实例没清理干净，导致上一步生成的js下一步仍然存在，排除在控制器生成的可能，<br>所以初步判断只有可能存在于<code>\Encore\Admin\Admin</code>实例中，因为这个实例是存在于容器中<br>所以直接从中寻找，发现原来是<code>\Encore\Admin\Admin</code>静态变量</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//因为是表单所以我们先进入 Encore\Admin\Form\Form 寻找Tool 发现renderDelete </span></span><br><span class="line"> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">renderDelete</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line"> $trans = [</span><br><span class="line">  <span class="string">'delete_confirm'</span> =&gt; trans(<span class="string">'admin.delete_confirm'</span>),</span><br><span class="line">  <span class="string">'confirm'</span> =&gt; trans(<span class="string">'admin.confirm'</span>),</span><br><span class="line">  <span class="string">'cancel'</span> =&gt; trans(<span class="string">'admin.cancel'</span>),</span><br><span class="line">  <span class="string">'delete'</span> =&gt; trans(<span class="string">'admin.delete'</span>),</span><br><span class="line"> ];</span><br><span class="line">	.</span><br><span class="line">	.</span><br><span class="line">	.</span><br><span class="line"></span><br><span class="line">  Admin::script($script);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">&lt;&lt;&lt;HTML</span></span><br><span class="line"><span class="string">&lt;div class="btn-group pull-right" style="margin-right: 5px"&gt;</span></span><br><span class="line"><span class="string"> &lt;a href="javascript:void(0);" class="btn btn-sm btn-danger <span class="subst">&#123;$class&#125;</span>-delete" title="<span class="subst">&#123;$trans['delete']&#125;</span>"&gt;</span></span><br><span class="line"><span class="string"> &lt;i class="fa fa-trash"&gt;&lt;/i&gt;&lt;span class="hidden-xs"&gt; <span class="subst">&#123;$trans['delete']&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string"> &lt;/a&gt;\&lt;/div&gt;</span></span><br><span class="line"><span class="string">HTML;</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>看到核心 Admin::script  这个原来是在Admin 下的 HasAssets，</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> string $script</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> bool   $deferred</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">script</span><span class="params">($script = <span class="string">''</span>, $deferred = false)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">empty</span>($script)) &#123;</span><br><span class="line">		 <span class="keyword">if</span> ($deferred) &#123;</span><br><span class="line">			  <span class="keyword">return</span> <span class="keyword">self</span>::$deferredScript = array_merge(<span class="keyword">self</span>::$deferredScript, (<span class="keyword">array</span>) $script);</span><br><span class="line">		 &#125;</span><br><span class="line">		  <span class="keyword">return</span> <span class="keyword">self</span>::$script = array_merge(<span class="keyword">self</span>::$script, (<span class="keyword">array</span>) $script);</span><br><span class="line">	 &#125;</span><br><span class="line">	  $script = array_unique(array_merge(<span class="keyword">static</span>::$script, <span class="keyword">static</span>::$deferredScript));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> view(<span class="string">'admin::partials.script'</span>, compact(<span class="string">'script'</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么解决起来就狠方便了 直接在bootstrap中初始化一下这些静态变量即可</p>
+<blockquote>
+<p>我觉得麻烦所以就直接写了一个clean，之前<code>憨批</code>的方法我也就换成更加粗暴的方式，最终还是清理掉<code>Admin在容器中的实例</code></p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">      \Encore\Admin\Admin::$script=[];</span><br><span class="line">      \Encore\Admin\Admin::$deferredScript=[];</span><br><span class="line">      \Encore\Admin\Admin::$headerJs = [];</span><br><span class="line">      \Encore\Admin\Admin::$manifestData = [];</span><br><span class="line">      \Encore\Admin\Admin::$extensions = [];</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">      $app-&gt;forgetInstance(\Encore\Admin\Admin::class);</span><br><span class="line">      Facade::clearResolvedInstance(\Encore\Admin\Admin::class);</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/JvCwNzii7a.jpg!/fw/1240" width="100" height="100">
+由此，问题一和问题二已经基本解决，菜鸟也想学习大佬的操作，想要更加优雅一点
+
+<blockquote>
+<p>下面就是解决exit问题了，中间复杂心里斗争，最后只能采用抛出异常的方式</p>
+</blockquote>
+<p><a href="https://github.com/z-song/laravel-admin/blob/master/src/Middleware/Pjax.php" target="_blank" rel="noopener">Pjax中的exit</a> 在56行</p>
+<p><a href="https://github.com/z-song/laravel-admin/tree/master/src/Grid/Exporters" target="_blank" rel="noopener">Export中</a> 这里就很多，我就不一一指出</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//导出操作</span></span><br><span class="line">     $res = Response::stream(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            $handle = fopen(<span class="string">'php://output'</span>, <span class="string">'w'</span>);</span><br><span class="line">            $titles = [];</span><br><span class="line">            <span class="keyword">$this</span>-&gt;chunk(<span class="function"><span class="keyword">function</span> <span class="params">($records)</span> <span class="title">use</span> <span class="params">($handle, &amp;$titles)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">empty</span>($titles)) &#123;</span><br><span class="line">                    $titles = <span class="keyword">$this</span>-&gt;getHeaderRowFromRecords($records);</span><br><span class="line">                    <span class="comment">// Add CSV headers</span></span><br><span class="line">                    fputcsv($handle, $titles);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">foreach</span> ($records <span class="keyword">as</span> $record) &#123;</span><br><span class="line">                    fputcsv($handle, <span class="keyword">$this</span>-&gt;getFormattedRecord($record));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="comment">// Close the output stream</span></span><br><span class="line">            fclose($handle);</span><br><span class="line">        &#125;, <span class="number">200</span>, $headers);</span><br><span class="line">        swoole_exit($res);</span><br><span class="line"><span class="comment">//Pjax 修改后</span></span><br><span class="line">	$next = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">($response)</span> </span>&#123;</span><br><span class="line">			  <span class="keyword">return</span> $response;</span><br><span class="line">	 &#125;;</span><br><span class="line">	</span><br><span class="line">  swoole_exit((<span class="keyword">new</span> <span class="keyword">static</span>())-&gt;handle(Request::capture(), $next));</span><br><span class="line">  </span><br><span class="line"><span class="comment">//swoole_exit神秘面纱</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!function_exists(<span class="string">'swoole_exit'</span>))&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">swoole_exit</span><span class="params">($response)</span></span></span><br><span class="line"><span class="function">	 </span>&#123;</span><br><span class="line">		 <span class="keyword">throw</span> <span class="keyword">new</span> App\Exceptions\SwooleExitException($response);</span><br><span class="line">	 &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//修改Handler  </span></span><br><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Exceptions</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Exception</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Exceptions</span>\<span class="title">Handler</span> <span class="title">as</span> <span class="title">ExceptionHandler</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Routing</span>\<span class="title">Router</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Response</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">HttpFoundation</span>\<span class="title">Response</span> <span class="title">as</span> <span class="title">SymfonyResponse</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span> <span class="keyword">extends</span> <span class="title">ExceptionHandler</span>\</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A list of the exception types that are not reported.\ *\ * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"> <span class="keyword">protected</span> $dontReport = [</span><br><span class="line">  SwooleExitException::class</span><br><span class="line">  ];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A list of the inputs that are never flashed for validation exceptions.\ *\ * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"> <span class="keyword">protected</span> $dontFlash = [</span><br><span class="line">  <span class="string">'password'</span>,</span><br><span class="line">  <span class="string">'password_confirmation'</span>,</span><br><span class="line"> ];</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Report or log an exception<span class="doctag">@param</span> \Exception  $exception\</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void\</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">report</span><span class="params">(Exception $exception)</span></span></span><br><span class="line"><span class="function"> </span>&#123;  </span><br><span class="line">	 <span class="keyword">parent</span>::report($exception);</span><br><span class="line"> &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Render an exception into an HTTP response.\ *\ * <span class="doctag">@param</span> \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> \Exception  $exception</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> \Illuminate\Http\Response</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">render</span><span class="params">($request, Exception $exception)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line">	 <span class="comment">//判断是否为我们的自定义异常</span></span><br><span class="line">	 <span class="keyword">if</span> ($exception <span class="keyword">instanceof</span> SwooleExitException) &#123;</span><br><span class="line">			 <span class="comment">//直接调用perpare</span></span><br><span class="line">		  <span class="keyword">return</span> $exception-&gt;getResponse()-&gt;prepare($request);</span><br><span class="line">	 &#125;</span><br><span class="line">	 <span class="keyword">return</span> <span class="keyword">parent</span>::render($request, $exception);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Exceptions</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Exception</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Throwable</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SwooleExitException</span> <span class="keyword">extends</span> <span class="title">Exception</span>\</span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="keyword">protected</span> $response;</span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($response,$message = <span class="string">""</span>, $code = <span class="number">0</span>, Throwable $previous = null)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line"> <span class="keyword">$this</span>-&gt;response = $response;</span><br><span class="line">  <span class="keyword">parent</span>::__construct($message, $code, $previous);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//获取响应内容</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getResponse</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;response;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/kGTCROO7Pe.jpg!/fw/1240" width="80" height="100">
+
+<p>如果你直接把exit去掉，那么 <strong>导出csv</strong> 会提示你 oops … ob_end_clean() 这个报错</p>
+<p>我们可以在<code>Hhxsv5\LaravelS\Illuminate\Laravel</code>中的 <code>handleDynamic</code> 加一个判断<code>ob_get_length()</code>也可以不加，因为后期解决exit退出问题，也就不会有这种报错</p>
+<blockquote>
+<p>解决思路<code>因为exit其实就是不执行后续的响应</code> ，所以我们想到异常就是执行到异常抛出之前，于是我们可以定义一种特定的异常，来提前结束，用来代替exit  ，至于 swoole/laravels 为什么不能使用这些函数我就不在这赘述</p>
+</blockquote>
+<p>使用异常，但是我们也得返回请求，但是我们的请求不能直接send掉，因为laravels需要使用swoole的方式返回，我们直接执行 send 是不起作用的，那我们就可以通过特定的异常返回我们所需要的响应，</p>
+<img src="https://cdn.learnku.com/uploads/images/201909/07/25840/1mCWY5nTni.jpg!/fw/1240" width="80" height="100">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public static function toResponse($request, $response)\</span><br><span class="line">&#123;</span><br><span class="line">	  if ($response instanceof Responsable) &#123;</span><br><span class="line">		  $response = $response-&gt;toResponse($request);</span><br><span class="line">	 &#125;</span><br><span class="line">	  if ($response instanceof PsrResponseInterface) &#123;</span><br><span class="line">		  $response = (new HttpFoundationFactory)-&gt;createResponse($response);</span><br><span class="line">	 &#125; elseif ($response instanceof Model &amp;&amp; $response-&gt;wasRecentlyCreated) &#123;</span><br><span class="line">		  $response = new JsonResponse($response, 201);</span><br><span class="line">	 &#125; elseif (! $response instanceof SymfonyResponse &amp;&amp;</span><br><span class="line">					  ($response instanceof Arrayable ||</span><br><span class="line">					  $response instanceof Jsonable ||</span><br><span class="line">					  $response instanceof ArrayObject ||</span><br><span class="line">					  $response instanceof JsonSerializable ||</span><br><span class="line">					  is_array($response))) &#123;</span><br><span class="line">						  $response = new JsonResponse($response);</span><br><span class="line">	 &#125; elseif (! $response instanceof SymfonyResponse) &#123;</span><br><span class="line">		  $response = new Response($response);</span><br><span class="line">	 &#125;</span><br><span class="line">	 if ($response-&gt;getStatusCode() === Response::HTTP_NOT_MODIFIED) &#123;</span><br><span class="line">			  $response-&gt;setNotModified();</span><br><span class="line">	&#125;</span><br><span class="line">	return $response-&gt;prepare($request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>替换<code>Router::toResponse();</code> 为 <code>$exception-&gt;prepare()</code> 无需其他中间过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于使用过程中发现toResponse()导出多次会发现异常问题，所以替换，具体原因还在查找中</span><br></pre></td></tr></table></figure>
+
+<p>感谢<code>z-song</code>提供的<a href="https://github.com/z-song/laravel-admin" target="_blank" rel="noopener">laravel-admin</a>优质扩展</p>
+<p>感谢<code>hhxsv5</code>提供的<a href="https://github.com/hhxsv5/laravel-s" target="_blank" rel="noopener">laravel-s</a>优质扩展</p>
+<p>具体分析请等下次更新，我们把<code>laravels</code>大致走一遍，学习一下</p>
+<p>laravels可以获取到最终响应然后返回，目的就达到了</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="blankqwq 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="blankqwq 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>blankqwq</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/09/22/laravel-admin在laravel-admin下运行——记一次因为莽付出的代价/" title="laravel-admin在laravel-admin下运行——记一次因为莽付出的代价">http://yoursite.com/2019/09/22/laravel-admin在laravel-admin下运行——记一次因为莽付出的代价/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/framework/" rel="tag"># framework</a>
+            
+              <a href="/tags/laravel/" rel="tag"># laravel</a>
+            
+              <a href="/tags/laravels/" rel="tag"># laravels</a>
+            
+              <a href="/tags/laravel-admin/" rel="tag"># laravel-admin</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/22/关于/" rel="next" title="关于">
+                  <i class="fa fa-chevron-left"></i> 关于
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/09/22/每日单词笔记/" rel="prev" title="每日单词笔记">
+                  每日单词笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#发现问题，问题介绍"><span class="nav-text">发现问题，问题介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决问题，提供思路"><span class="nav-text">解决问题，提供思路</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="blankqwq">
+  <p class="site-author-name" itemprop="name">blankqwq</p>
+  <div class="site-description" itemprop="description">直到最后他才说了认输</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/blankqwq" title="GitHub &rarr; https://github.com/blankqwq" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">blankqwq</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">9k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">8 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=bXzLYdzbXKKKk89oFCm9qtma-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'bXzLYdzbXKKKk89oFCm9qtma-gzGzoHsz',
+            'X-LC-Key': 'JYjCYJ60MpA00AT2kg9DNuBs',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
