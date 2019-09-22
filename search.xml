@@ -5,9 +5,4 @@
     <url>%2F2019%2F09%2F22%2F%E5%85%B3%E4%BA%8E%2F</url>
     <content type="text"></content>
   </entry>
-  <entry>
-    <title><![CDATA[Tp 3.2 运行分析]]></title>
-    <url>%2F2019%2F09%2F22%2FTp-3-2-%E8%BF%90%E8%A1%8C%E5%88%86%E6%9E%90%2F</url>
-    <content type="text"><![CDATA[think 3.2 文件逐层进入让我们一起进入thinkphp的设计方式 看看3.2性能为什么那么强大[仅仅一部分] - 路由等非常迅速 - 但是遇到数据库操作[关联关系n+1问题] 有什么可取之处 又有什么需要避免的地方 优点： tp3.2与ssh非常相似 所以采用java的开发思路去开发tp是非常舒服的 还有诸多可以优化的地方 --&gt; 1.优化框架n+1问题 --&gt; 2.解决一些其他耗时性能问题 使得框架更有利于快速开发 本次实践 发现虽然很多轮子都需要手动找或者自己做 但是,解决了一些很久以前没使用过的底层问题 注重过程 缺点： 但是tp3.2 我认为性能并不是特别的强势 [很多地方仍然可以优化]入口文件 index.php 定义一些基础-&gt;引入引导文件 12345678// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为falsedefine(&apos;APP_DEBUG&apos;,True);//默认模块define(&apos;BIND_MODULE&apos;,&apos;Home&apos;);//应用目录define(&apos;APP_PATH&apos;,&apos;./Application/&apos;);//引入核心文件require &quot;./ThinkPHP/ThinkPHP.php&quot;; 引导运行文件 ThinkPHP.php入口文件解析 1234567891011121314151617181920212223242526272829303132333435363738// 记录开始运行时间$GLOBALS[&apos;_beginTime&apos;] = microtime(TRUE);if(!IS_CLI) &#123; // 当前文件名 if(!defined(&apos;_PHP_FILE_&apos;)) &#123; if(IS_CGI) &#123; //CGI/FASTCGI模式下 $_temp = explode(&apos;.php&apos;,$_SERVER[&apos;PHP_SELF&apos;]); define(&apos;_PHP_FILE_&apos;, rtrim(str_replace($_SERVER[&apos;HTTP_HOST&apos;],&apos;&apos;,$_temp[0].&apos;.php&apos;),&apos;/&apos;)); &#125;else &#123; define(&apos;_PHP_FILE_&apos;, rtrim($_SERVER[&apos;SCRIPT_NAME&apos;],&apos;/&apos;)); &#125; &#125; if(!defined(&apos;__ROOT__&apos;)) &#123; $_root = rtrim(dirname(_PHP_FILE_),&apos;/&apos;); define(&apos;__ROOT__&apos;, (($_root==&apos;/&apos; || $_root==&apos;\\&apos;)?&apos;&apos;:$_root)); &#125;&#125;// 加载核心Think类 // CORE_PATH ==&gt; Library/Think/Think.vlass.phprequire CORE_PATH.&apos;Think&apos;.EXT;//开始引导运行Think\Think::start(); Think 核心类 Think.class.php 引导结构 性能缺点分析todo解耦合todo]]></content>
-  </entry>
 </search>
