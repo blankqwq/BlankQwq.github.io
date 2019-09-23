@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[计算机科学思维]]></title>
+    <url>%2F2019%2F09%2F23%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%80%9D%E7%BB%B4%2F</url>
+    <content type="text"><![CDATA[计算机科学家思维 什么是计算机相关? 未找到答案 知识分为哪两种 declarative陈述性 一个事实性的陈述imprerative程序性 对推论过程的描述演变过程固定程序计算机差分机: 手动转动齿轮完成四则运算 例如计算器:只能完成特定的计算ALU分析指令集进行计算编程是什么? 一堆原料根据不同的食谱可以演变成为不同的菜 当然与不同的厨师，不同的厨具也能产生不同的 类比一下=&gt; 不同的数据类型结合一起也能产生不同的程序 爱兰图灵说：用六种基本数据类型就可以表达整个世界 图灵兼容性：你能在这个语言中实现的东西， 自然也能在另一个语言中实现[用php写一个爬虫框架!!] 编译型语言 能够提前预知到错误 解释型语言 运行过程中才能发现 语法 语义的区分 python语义 cat dog boy Static 语义 My clothes is red full 语义 What i want to do]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[java基础学习——发展历史以及基础概念]]></title>
+    <url>%2F2019%2F09%2F22%2Fjava%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2%E4%BB%A5%E5%8F%8A%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%2F</url>
+    <content type="text"><![CDATA[用于及时复习java基础知识 java基础是学习大数据 J2EE Android 开发的基石！！ 12345Graphical User Interface (GUI) --&gt; 图形化界面 Command User Inteerface (CLI) --&gt; 命令行界面 后端开发语言:java php python go node.js java发展历史 1991 年 Green 项目 最初名称为 Oak橡树 1996 年发布jdk 1.0 2004年发布里程碑式版本 1.5 为突出该版本的和重要性,后更名为jdk5.0 2008年发布jdk8.0 =&gt; 1.8 是继jdk5.0版本变化最大的一个版本 2018年发布jdk 10.0 [jdk1.8.3] 等等 java技术平台体系 企业级应用 Android开发 大数据平台开发 java特点 java 中舍弃 C语言中容易引起错误的指针， 增加了gc垃圾回收机制 面向对象 面向对象三大特性: 继承，多态，封 健壮性 吸引了c, c++ 语言的特性 跨平台性 -只要安装了 java虚拟机，即可运行java软件 java 基础语法 main 函数 123456class A &#123; public static void main(String args[])&#123; &#125;&#125; 数据类型//todo 面向对象//todo]]></content>
+      <categories>
+        <category>学习</category>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>stduy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[每日单词笔记]]></title>
     <url>%2F2019%2F09%2F22%2F%E6%AF%8F%E6%97%A5%E5%8D%95%E8%AF%8D%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[9.19 constitution 宪法 sencus 人口普查 conducted 进行 distributing 分布 federal 联邦的 purpose 目的 funds 基金 good stuff like that 像这样的好东西 booming蓬勃发展 compile 编译 predicted 预测 compute 计算 9.20 scale 规模 increase 增加 9.21 episode 插曲 symbol 符号 components 组成成分]]></content>
@@ -8,8 +26,8 @@
         <category>学习</category>
       </categories>
       <tags>
-        <tag>English</tag>
         <tag>stduy</tag>
+        <tag>English</tag>
       </tags>
   </entry>
   <entry>
