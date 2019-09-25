@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[初探RPC分布式服务模式——swoole]]></title>
+    <url>%2F2019%2F09%2F25%2F%E5%88%9D%E6%8E%A2RPC%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%BC%8F%E2%80%94%E2%80%94swoole%2F</url>
+    <content type="text"><![CDATA[通过swoole多监听的方式创建服务注册中心，通过模拟其他服务器进行注册。 RPC Rpc是什么？ RPC全称为Remote Procedure Call，翻译过来为“远程过程调用”。目前，主流的平台中都支持各种远程调用技术，以满足分布式系统架构中不同的系统之间的远程通信和相互调用，也是实现微服务当中的重要的环节。 客户端通过发送一个规定的rpc协议，请求服务的注册中心，由服务注册中心检索可用服务，并且实现调用转发，服务内容由代码服务器在启动的时候，注册到服务中心。服务中心暂时利用redis存储内容。 服务架构图 服务中心 通过redis中的集合存储服务注册的内容 心跳维持，健康检查 定期检测服务器的健康，如果服务器宕机，从服务列表当中删除 多端口协议混合监听接收rpc服务调用 协议的统一转换 服务端代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980&lt;?phpclass One&#123; public $server; public $table; public static $task_worker_num = 5; private $redis; public function __construct($config) &#123; //新建server $server = new swoole_websocket_server('0.0.0.0', 9500); $server-&gt;set($config); //绑定server $server-&gt;on('Message', [$this, 'message']); $server-&gt;on('WorkerStart', [$this, 'workerStart']); $server-&gt;on('close', [$this, 'close']); $server-&gt;start(); &#125; public function message($serv, $fd) &#123; //注册 if ($data = json_decode($fd-&gt;data, true)) &#123; //判断是否是注册 if ($data['method'] == 'register') &#123; $service_key='service'; //echo $service_key; var_dump($service_key); $value=json_encode([ 'name'=&gt;$data['name'], 'ip'=&gt;$data['ip'], 'port'=&gt;$data['port'], ]); $res=$this-&gt;redis-&gt;sAdd($service_key,$value); //swoole_table $redis=$this-&gt;redis; //利用定时器,检测代码服务端的存活状态 if($res)&#123; $serv-&gt;tick(3000,function ($id) use($serv,$service_key,$value,$redis,$fd)&#123; //不是存活的状态下 if(!$serv-&gt;exist($fd-&gt;fd))&#123; //检测服务在不在redis当中,如果在就移除这个服务 if($redis-&gt;SISMEMBER($service_key,$value))&#123; //只是移除,如果需要可以更新状态 $redis-&gt;sRem($service_key,$value); &#125; //获取集合当中的成员 var_dump($redis-&gt;sMembers($service_key)); //清除定时器 $serv-&gt;clearTimer($id); &#125; &#125;); &#125; &#125; &#125; &#125; public function workerStart($serv, $fd) &#123; //连接redis $this-&gt;redis = new \Redis(); $this-&gt;redis-&gt;connect('127.0.0.1', '6379'); &#125; public function close($serv, $fd) &#123; //连接redis &#125;&#125;$config = [ 'worker_num' =&gt; 4, //worker process num 'max_request' =&gt; 3000, 'heartbeat_idle_time' =&gt; 5,//连接最大的空闲时间 'heartbeat_check_interval' =&gt; 2 //定时检测在线列表];new One($config); 服务端 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162&lt;?phpuse client\Client\Client;class Service01&#123; private $data; public $server; public $table; public function __construct($config, $data) &#123; //新建server $this-&gt;data = $data; $server = new swoole_websocket_server($config['host'],$config['port']); $server-&gt;set($config); //绑定server $server-&gt;on('WorkerStart', [$this, 'WorkerStart']); $server-&gt;on('Message', [$this, 'Message']); $server-&gt;start(); &#125; public function WorkerStart($serv, $fd) &#123; echo "启动$fd" . PHP_EOL; if ($fd === 0) &#123; //注册服务 include dirname(__DIR__) . "/client/Client.php"; $client = new Client("127.0.0.1", 9500); //需要发送的消息 $data = $this-&gt;data; $cli = $client-&gt;asyn_websocket(); $cli-&gt;push(json_encode($data)); //定时发送 Swoole\Timer::tick(200, function () use ($cli) &#123; $cli-&gt;push('', 9); &#125;); &#125; &#125; public function Message($serv, $fd, $rd, $data) &#123; &#125;&#125;$config = array( 'worker_num' =&gt; 4, //worker process num 'host'=&gt;'0.0.0.0', 'port'=&gt;9501);$data = [ 'method' =&gt; 'register', 'name' =&gt; 'CartService', 'ip' =&gt; '127.0.0.1', 'port' =&gt; 9501];new Service01($config, $data); Tools =&gt; 简单版的连接工具类 ```php&lt;?phpnamespace client\Client;/** Class Client @package client\Client 连接客户端 /class Client{ protected $host; protected $port; protected $client; public function __construct($host, $port) { $this-&gt;host = $host; $this-&gt;port = $port; } /** @param string $path @return \Swoole\Coroutine\Http\Client /public function asyn_websocket( $path = ‘/‘){ $this-&gt;client=new \Swoole\Coroutine\Http\Client($this-&gt;host,$this-&gt;port); //升级未长连接 $this-&gt;client-&gt;upgrade($path); return $this-&gt;client;} }]]></content>
+      <categories>
+        <category>学习</category>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>php</tag>
+        <tag>swoole</tag>
+        <tag>rpc</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[计算机科学思维]]></title>
     <url>%2F2019%2F09%2F23%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E6%80%9D%E7%BB%B4%2F</url>
     <content type="text"><![CDATA[计算机科学家思维 什么是计算机相关? 未找到答案 知识分为哪两种 declarative陈述性 一个事实性的陈述imprerative程序性 对推论过程的描述演变过程固定程序计算机差分机: 手动转动齿轮完成四则运算 例如计算器:只能完成特定的计算ALU分析指令集进行计算编程是什么? 一堆原料根据不同的食谱可以演变成为不同的菜 当然与不同的厨师，不同的厨具也能产生不同的 类比一下=&gt; 不同的数据类型结合一起也能产生不同的程序 爱兰图灵说：用六种基本数据类型就可以表达整个世界 图灵兼容性：你能在这个语言中实现的东西， 自然也能在另一个语言中实现[用php写一个爬虫框架!!] 编译型语言 能够提前预知到错误 解释型语言 运行过程中才能发现 语法 语义的区分 python语义 cat dog boy Static 语义 My clothes is red full 语义 What i want to do]]></content>
@@ -21,7 +35,7 @@
   <entry>
     <title><![CDATA[每日单词笔记]]></title>
     <url>%2F2019%2F09%2F22%2F%E6%AF%8F%E6%97%A5%E5%8D%95%E8%AF%8D%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[9.19 constitution 宪法 sencus 人口普查 conducted 进行 distributing 分布 federal 联邦的 purpose 目的 funds 基金 good stuff like that 像这样的好东西 booming蓬勃发展 compile 编译 predicted 预测 compute 计算 9.20 scale 规模 increase 增加 9.21 episode 插曲 symbol 符号 components 组成成分]]></content>
+    <content type="text"><![CDATA[9.19 constitution 宪法 sencus 人口普查 conducted 进行 distributing 分布 federal 联邦的 purpose 目的 funds 基金 good stuff like that 像这样的好东西 booming蓬勃发展 compile 编译 predicted 预测 compute 计算 9.20 scale 规模 increase 增加 9.21 episode 插曲 symbol 符号 components 组成成分 9.22 freshman 大一新生 recipes 方法 general 通常]]></content>
       <categories>
         <category>学习</category>
       </categories>
