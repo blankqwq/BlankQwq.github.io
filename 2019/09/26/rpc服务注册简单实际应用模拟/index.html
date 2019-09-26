@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="在原有的基础上，我们将服务完善添加HttpServer">
+<meta name="keywords" content="php,swoole,rpc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rpc服务注册简单实际应用模拟">
+<meta property="og:url" content="http://yoursite.com/2019/09/26/rpc服务注册简单实际应用模拟/index.html">
+<meta property="og:site_name" content="blankqwq">
+<meta property="og:description" content="在原有的基础上，我们将服务完善添加HttpServer">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-26T15:42:09.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rpc服务注册简单实际应用模拟">
+<meta name="twitter:description" content="在原有的基础上，我们将服务完善添加HttpServer">
+  <link rel="canonical" href="http://yoursite.com/2019/09/26/rpc服务注册简单实际应用模拟/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>rpc服务注册简单实际应用模拟 | blankqwq</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">blankqwq</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">记录学习之路</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+    
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/rpc服务注册简单实际应用模拟/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="blankqwq">
+      <meta itemprop="description" content="直到最后他才说了认输">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blankqwq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">rpc服务注册简单实际应用模拟
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-26 19:38:00 / 修改时间：23:42:09" itemprop="dateCreated datePublished" datetime="2019-09-26T19:38:00+08:00">2019-09-26</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/微服务/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/09/26/rpc服务注册简单实际应用模拟/" class="post-meta-item leancloud_visitors" data-flag-title="rpc服务注册简单实际应用模拟" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>6 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>在原有的基础上，我们将服务完善添加HttpServer</p>
+</blockquote><a id="more"></a>
+<h2 id="服务模式"><a href="#服务模式" class="headerlink" title="服务模式"></a>服务模式</h2><ul>
+<li><p>RPC注册管理服务</p>
+<ul>
+<li><p>管理注册中心和配置中心</p>
+<ul>
+<li>CartService</li>
+</ul>
+<ul>
+<li><p>ShopService</p>
+</li>
+<li><p>NameService</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HttpServer服务</p>
+<ul>
+<li><p>提供网页基础服务</p>
+<ul>
+<li><p>内置rpc客户端，远程获取RPC服务中redis内容【可以直接省去】</p>
+</li>
+<li><p>再从rpc-client中获取最终结果</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h2><p>//todo</p>
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><p>//todo</p>
+<h3 id="详细代码"><a href="#详细代码" class="headerlink" title="详细代码"></a>详细代码</h3><blockquote>
+<p>httpServer</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $server;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($host,$port)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server = <span class="keyword">new</span> \Swoole\Http\Server($host,$port);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;on(<span class="string">'request'</span>,[<span class="keyword">$this</span>,<span class="string">'onRequest'</span>]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onRequest</span><span class="params">(\Swoole\Http\Request $request,\Swoole\Http\Response $response)</span></span>&#123;</span><br><span class="line">        $response-&gt;header(<span class="string">'Content-Type'</span>,<span class="string">'text/html'</span>);</span><br><span class="line">        <span class="comment">//charset设置错误</span></span><br><span class="line">        $response-&gt;header(<span class="string">'Charset'</span>,<span class="string">'utf-8'</span>);</span><br><span class="line">        $header = $request-&gt;header;</span><br><span class="line">        ob_start();</span><br><span class="line">        <span class="keyword">include</span> <span class="string">"./index.php"</span>;</span><br><span class="line">        $res = ob_get_clean();</span><br><span class="line">        $response-&gt;end($res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> Server(<span class="string">'0.0.0.0'</span>,<span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>index.php</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"./RpcClient1.php"</span>;</span><br><span class="line">$client = <span class="keyword">new</span> RpcClient1(<span class="string">'127.0.0.1'</span>, <span class="number">9801</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"ch"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span></span><br><span class="line">          content=<span class="string">"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">    &lt;title&gt;test服务&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;</span><br><span class="line">    <span class="meta">&lt;?php</span></span><br><span class="line">    $client-&gt;service(<span class="string">'CartService'</span>)-&gt;getList(<span class="string">'aa'</span>);</span><br><span class="line">    <span class="meta">?&gt;</span></span><br><span class="line">&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>RpcClient</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RpcClient1</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $client;</span><br><span class="line">    <span class="keyword">public</span> $data;</span><br><span class="line">    <span class="keyword">protected</span> $ip;</span><br><span class="line">    <span class="keyword">protected</span> $port;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($ip, $port)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//连接数据库</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;ip = $ip;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;port = $port;</span><br><span class="line">        <span class="comment">//协议</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;client = <span class="keyword">new</span> swoole_client(SWOOLE_SOCK_TCP, SWOOLE_SOCK_SYNC);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">service</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//发送信息</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;client-&gt;connect(<span class="keyword">$this</span>-&gt;ip, <span class="keyword">$this</span>-&gt;port);</span><br><span class="line">        $date = [</span><br><span class="line">            <span class="string">'method'</span> =&gt; <span class="string">'get'</span>,</span><br><span class="line">            <span class="string">'name'</span> =&gt; $name,</span><br><span class="line">        ];</span><br><span class="line">        <span class="keyword">$this</span>-&gt;client-&gt;send(json_encode($date,<span class="keyword">true</span>));</span><br><span class="line">        $data = <span class="keyword">$this</span>-&gt;client-&gt;recv();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;data = !<span class="keyword">empty</span>($data) ? json_decode($data, <span class="keyword">true</span>) : <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name, $arguments)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $data = [</span><br><span class="line">            <span class="string">'action'</span> =&gt; $name,</span><br><span class="line">            <span class="string">'argv'</span> =&gt; $arguments,</span><br><span class="line">        ];</span><br><span class="line">        var_dump(<span class="keyword">$this</span>-&gt;data, $data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Rpc 注册服务中心</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">One</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $server;</span><br><span class="line">    <span class="keyword">public</span> $table;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> $task_worker_num = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">private</span> $redis;</span><br><span class="line">    <span class="keyword">protected</span> $tcpServer;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($config)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//新建server</span></span><br><span class="line">        $server = <span class="keyword">new</span> swoole_websocket_server(<span class="string">'0.0.0.0'</span>, <span class="number">9500</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server = $server;</span><br><span class="line">        $server-&gt;set($config);</span><br><span class="line">        <span class="comment">//绑定server</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;on(<span class="string">'Message'</span>, [<span class="keyword">$this</span>, <span class="string">'message'</span>]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;on(<span class="string">'WorkerStart'</span>, [<span class="keyword">$this</span>, <span class="string">'workerStart'</span>]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;on(<span class="string">'close'</span>, [<span class="keyword">$this</span>, <span class="string">'close'</span>]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;on(<span class="string">'receive'</span>, [<span class="keyword">$this</span>, <span class="string">'onReceive'</span>]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;tcpServer = <span class="keyword">$this</span>-&gt;server-&gt;addlistener(<span class="string">'0.0.0.0'</span>, <span class="string">'9801'</span>, SWOOLE_TCP);</span><br><span class="line"><span class="comment">//        $server-&gt;on('receive', [$this, 'onReceive']);</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;tcpServer-&gt;set([</span><br><span class="line">            <span class="string">'worker_num'</span> =&gt; <span class="number">3</span>,</span><br><span class="line">            <span class="string">'package_max_length'</span> =&gt; <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>,</span><br><span class="line">            <span class="string">'max_request'</span> =&gt; <span class="number">3000</span>,</span><br><span class="line">        ]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;server-&gt;start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onReceive</span><span class="params">($serv, $fd, $reactor_id, $data)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        var_dump($data);</span><br><span class="line">        $data = json_decode($data, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">if</span> ($data) &#123;</span><br><span class="line">            var_dump($data);</span><br><span class="line">            <span class="keyword">if</span> ($data[<span class="string">'method'</span>] == <span class="string">'get'</span>) &#123;</span><br><span class="line">                <span class="comment">//获取服务</span></span><br><span class="line">                $service_key = <span class="string">'service:'</span> . $data[<span class="string">'name'</span>];</span><br><span class="line">                $res = <span class="keyword">$this</span>-&gt;redis-&gt;sMembers($service_key);</span><br><span class="line">                var_dump($res);</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">empty</span>($res)) &#123;</span><br><span class="line">                    $serv-&gt;send($fd, <span class="string">''</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                $serv-&gt;send($fd, json_encode($res));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span><span class="params">($serv, $fd)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//注册</span></span><br><span class="line">        <span class="keyword">if</span> ($data = json_decode($fd-&gt;data, <span class="keyword">true</span>)) &#123;</span><br><span class="line">            <span class="comment">//判断是否是注册</span></span><br><span class="line">            var_dump($data);</span><br><span class="line">            <span class="keyword">if</span> ($data[<span class="string">'method'</span>] == <span class="string">'register'</span>) &#123;</span><br><span class="line">                $service_key = <span class="string">'service:'</span> . $data[<span class="string">'name'</span>];</span><br><span class="line">                <span class="comment">//echo $service_key;</span></span><br><span class="line">                $value = json_encode([</span><br><span class="line">                    <span class="string">'ip'</span> =&gt; $data[<span class="string">'ip'</span>],</span><br><span class="line">                    <span class="string">'port'</span> =&gt; $data[<span class="string">'port'</span>],</span><br><span class="line">                ]);</span><br><span class="line">                var_dump($service_key, $value);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;redis-&gt;sRem($service_key, $value);</span><br><span class="line">                $res = <span class="keyword">$this</span>-&gt;redis-&gt;sAdd($service_key, $value); <span class="comment">//swoole_table</span></span><br><span class="line">                $redis = <span class="keyword">$this</span>-&gt;redis;</span><br><span class="line">                <span class="comment">//利用定时器,检测代码服务端的存活状态</span></span><br><span class="line">                <span class="keyword">if</span> ($res) &#123;</span><br><span class="line">                    $serv-&gt;tick(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> <span class="params">($id)</span> <span class="title">use</span> <span class="params">($serv, $service_key, $value, $redis, $fd)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">//不是存活的状态下</span></span><br><span class="line">                        <span class="keyword">if</span> (!$serv-&gt;exist($fd-&gt;fd)) &#123;</span><br><span class="line">                            <span class="comment">//检测服务在不在redis当中,如果在就移除这个服务</span></span><br><span class="line">                            <span class="keyword">if</span> ($redis-&gt;SISMEMBER($service_key, $value)) &#123;</span><br><span class="line">                                <span class="comment">//只是移除,如果需要可以更新状态</span></span><br><span class="line">                                $redis-&gt;sRem($service_key, $value);</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="comment">//获取集合当中的成员</span></span><br><span class="line">                            var_dump($redis-&gt;sMembers($service_key));</span><br><span class="line">                            <span class="comment">//清除定时器</span></span><br><span class="line">                            $serv-&gt;clearTimer($id);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ($data[<span class="string">'method'</span>] == <span class="string">'get'</span>) &#123;</span><br><span class="line">                <span class="comment">//获取服务</span></span><br><span class="line">                $service_key = <span class="string">'service:'</span> . $data[<span class="string">'name'</span>];</span><br><span class="line">                $res = <span class="keyword">$this</span>-&gt;redis-&gt;sMembers($service_key);</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">empty</span>($res)) &#123;</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;server-&gt;push($fd-&gt;fd, <span class="string">''</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;server-&gt;push($fd-&gt;fd, json_encode($res));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">workerStart</span><span class="params">($serv, $fd)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//连接redis</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;redis = <span class="keyword">new</span> \Redis();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;redis-&gt;connect(<span class="string">'127.0.0.1'</span>, <span class="string">'6379'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">close</span><span class="params">($serv, $fd)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//连接redis</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$config = [</span><br><span class="line">    <span class="string">'worker_num'</span> =&gt; <span class="number">4</span>,    <span class="comment">//worker process num</span></span><br><span class="line">    <span class="string">'max_request'</span> =&gt; <span class="number">3000</span>,</span><br><span class="line">    <span class="string">'heartbeat_idle_time'</span> =&gt; <span class="number">5</span>,<span class="comment">//连接最大的空闲时间</span></span><br><span class="line">    <span class="string">'heartbeat_check_interval'</span> =&gt; <span class="number">2</span> <span class="comment">//定时检测在线列表</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> One($config);</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="blankqwq 微信支付">
+        <p>微信支付</p>
+      </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="blankqwq 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>blankqwq</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/09/26/rpc服务注册简单实际应用模拟/" title="rpc服务注册简单实际应用模拟">http://yoursite.com/2019/09/26/rpc服务注册简单实际应用模拟/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/php/" rel="tag"># php</a>
+            
+              <a href="/tags/swoole/" rel="tag"># swoole</a>
+            
+              <a href="/tags/rpc/" rel="tag"># rpc</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/25/初探RPC分布式服务模式——swoole/" rel="next" title="初探RPC分布式服务模式——swoole">
+                  <i class="fa fa-chevron-left"></i> 初探RPC分布式服务模式——swoole
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务模式"><span class="nav-text">服务模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程分析"><span class="nav-text">流程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际应用"><span class="nav-text">实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#详细代码"><span class="nav-text">详细代码</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.gif"
+      alt="blankqwq">
+  <p class="site-author-name" itemprop="name">blankqwq</p>
+  <div class="site-description" itemprop="description">直到最后他才说了认输</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+        
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/blankqwq" title="GitHub &rarr; https://github.com/blankqwq" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">blankqwq</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">22k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=bXzLYdzbXKKKk89oFCm9qtma-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'bXzLYdzbXKKKk89oFCm9qtma-gzGzoHsz',
+            'X-LC-Key': 'JYjCYJ60MpA00AT2kg9DNuBs',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/muse.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
