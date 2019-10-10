@@ -39,6 +39,15 @@
     <content type="text"><![CDATA[计算机科学家思维 什么是计算机相关? 未找到答案 知识分为哪两种 declarative陈述性 一个事实性的陈述imprerative程序性 对推论过程的描述演变过程固定程序计算机差分机: 手动转动齿轮完成四则运算 例如计算器:只能完成特定的计算ALU分析指令集进行计算编程是什么? 一堆原料根据不同的食谱可以演变成为不同的菜 当然与不同的厨师，不同的厨具也能产生不同的 类比一下=&gt; 不同的数据类型结合一起也能产生不同的程序 爱兰图灵说：用六种基本数据类型就可以表达整个世界 图灵兼容性：你能在这个语言中实现的东西， 自然也能在另一个语言中实现[用php写一个爬虫框架!!] 编译型语言 能够提前预知到错误 解释型语言 运行过程中才能发现 语法 语义的区分 python语义 cat dog boy Static 语义 My clothes is red full 语义 What i want to do]]></content>
   </entry>
   <entry>
+    <title><![CDATA[go基础学习]]></title>
+    <url>%2F2019%2F09%2F22%2Fgo%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[go注意事项 必须以go为后缀 严格区分大小写 go应用程序执行入口是main go语言每条语句不需要加; go语言一行内最好别出现多条语句 go中import但未使用的包和未使用的变量会导致编译未通过]]></content>
+      <tags>
+        <tag>go</tag>
+        <tag>study</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[java基础学习——发展历史以及基础概念]]></title>
     <url>%2F2019%2F09%2F22%2Fjava%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%8F%91%E5%B1%95%E5%8E%86%E5%8F%B2%E4%BB%A5%E5%8F%8A%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%2F</url>
     <content type="text"><![CDATA[用于及时复习java基础知识 java基础是学习大数据 J2EE Android 开发的基石！！ 12345Graphical User Interface (GUI) --&gt; 图形化界面 Command User Inteerface (CLI) --&gt; 命令行界面 后端开发语言:java php python go node.js java发展历史 1991 年 Green 项目 最初名称为 Oak橡树 1996 年发布jdk 1.0 2004年发布里程碑式版本 1.5 为突出该版本的和重要性,后更名为jdk5.0 2008年发布jdk8.0 =&gt; 1.8 是继jdk5.0版本变化最大的一个版本 2018年发布jdk 10.0 [jdk1.8.3] 等等 java技术平台体系 企业级应用 Android开发 大数据平台开发 java特点 java 中舍弃 C语言中容易引起错误的指针， 增加了gc垃圾回收机制 面向对象 面向对象三大特性: 继承，多态，封 健壮性 吸引了c, c++ 语言的特性 跨平台性 -只要安装了 java虚拟机，即可运行java软件 java 基础语法 main 函数 123456class A &#123; public static void main(String args[])&#123; &#125;&#125; 数据类型//todo 面向对象//todo]]></content>
