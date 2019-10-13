@@ -41,7 +41,7 @@
   <entry>
     <title><![CDATA[go基础学习]]></title>
     <url>%2F2019%2F09%2F22%2Fgo%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%2F</url>
-    <content type="text"><![CDATA[go注意事项 必须以go为后缀 严格区分大小写 go应用程序执行入口是main go语言每条语句不需要加; go语言一行内最好别出现多条语句 go中import但未使用的包和未使用的变量会导致编译未通过]]></content>
+    <content type="text"><![CDATA[go数据类型基础数据类型 字符型 浮点型 整型 字符串 派生/数据类型 指针 数组 结构体 管道 函数 切口 接口 map 12345678910111213141516171819 var a1 int; fmt.Println("a1 = ",a1,unsafe.Alignof(a1)) var a2 float32; fmt.Println("a2 = ",a2,unsafe.Alignof(a2)) var a3 float64; fmt.Println("a3 = ",a3,unsafe.Alignof(a3)) var a4 string; fmt.Println("a4 = ",a4,unsafe.Alignof(a4)) var a5 byte; fmt.Println("a5 = ",a5,unsafe.Alignof(a5)) var a6 bool; fmt.Println("a6 = ",a6,unsafe.Alignof(a6)) //a1 = 0 8//a2 = 0 4//a3 = 0 8//a4 = 8//a5 = 0 1//a6 = false 1 变量声明 传统定义方式 定义加赋值的两种方式 123456789101112131415161718192021222324252627package mainimport ( "fmt" "time")func main() &#123; var n int; n = 1; //默认值 var m int var o = "aa" p:="dd" fmt.Print("hello world") time.Sleep(3*time.Second) fmt.Println("hello world",n,m,o,p) //多变量方式1 var a,b,c int; fmt.Println("a",a,b,c) //方式2 var e,f,g = "a",1,2 fmt.Println("a",e,f,g) //方式3 u,v,w:= 1,2,3 fmt.Println("a",u,v,w)&#125; 注意事项 必须以go为后缀 严格区分大小写 go应用程序执行入口是main go语言每条语句不需要加; go语言一行内最好别出现多条语句 go中import但未使用的包和未使用的变量会导致编译未通过]]></content>
       <tags>
         <tag>go</tag>
         <tag>study</tag>
