@@ -64,17 +64,24 @@
   };
 </script>
 
-  <meta name="description" content="直到最后他才说了认输">
-<meta property="og:type" content="website">
-<meta property="og:title" content="blankqwq">
-<meta property="og:url" content="http://yoursite.com/tags/mvc/index.html">
+  <meta name="description" content="C语言运行流程//静态链接编译hello.c &amp;gt; gcc hello.c -o hello -static //查看详情 &amp;gt; gcc hello.c -o hello -static --verbose      可以看出编译背后使用了cc1，as，collect2 三个命令     cc1 是gcc的编译器 产生=》 hello.s     as 是汇编器命令 =&amp;gt; hello">
+<meta name="keywords" content="study,c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写一个编译器（C语言子集）">
+<meta property="og:url" content="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/index.html">
 <meta property="og:site_name" content="blankqwq">
-<meta property="og:description" content="直到最后他才说了认输">
+<meta property="og:description" content="C语言运行流程//静态链接编译hello.c &amp;gt; gcc hello.c -o hello -static //查看详情 &amp;gt; gcc hello.c -o hello -static --verbose      可以看出编译背后使用了cc1，as，collect2 三个命令     cc1 是gcc的编译器 产生=》 hello.s     as 是汇编器命令 =&amp;gt; hello">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/pasted-4.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-5.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-6.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-7.png">
+<meta property="og:updated_time" content="2019-11-02T12:42:27.356Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="blankqwq">
-<meta name="twitter:description" content="直到最后他才说了认输">
-  <link rel="canonical" href="http://yoursite.com/tags/mvc/">
+<meta name="twitter:title" content="编写一个编译器（C语言子集）">
+<meta name="twitter:description" content="C语言运行流程//静态链接编译hello.c &amp;gt; gcc hello.c -o hello -static //查看详情 &amp;gt; gcc hello.c -o hello -static --verbose      可以看出编译背后使用了cc1，as，collect2 三个命令     cc1 是gcc的编译器 产生=》 hello.s     as 是汇编器命令 =&amp;gt; hello">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-4.png">
+  <link rel="canonical" href="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/">
 
 
 <script id="page-configurations">
@@ -82,13 +89,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>标签: mvc | blankqwq</title>
+  <title>编写一个编译器（C语言子集） | blankqwq</title>
   
 
 
@@ -221,24 +228,6 @@
 
     
 
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-  
-
 </nav>
   <div class="site-search">
     <div class="popup search-popup">
@@ -278,60 +267,268 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block tag">
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1 class="collection-header">mvc<small>标签</small>
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="blankqwq">
+      <meta itemprop="description" content="直到最后他才说了认输">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blankqwq">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">编写一个编译器（C语言子集）
+
+          
         </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-02 20:39:00 / 修改时间：20:42:27" itemprop="dateCreated datePublished" datetime="2019-11-02T20:39:00+08:00">2019-11-02</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编译器/" itemprop="url" rel="index"><span itemprop="name">编译器</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编译器/gcc/" itemprop="url" rel="index"><span itemprop="name">gcc</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/11/02/编写一个编译器（C语言子集）/" class="post-meta-item leancloud_visitors" data-flag-title="编写一个编译器（C语言子集）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>1 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="C语言运行流程"><a href="#C语言运行流程" class="headerlink" title="C语言运行流程"></a>C语言运行流程</h2><pre><code>//静态链接编译hello.c
+&gt; gcc hello.c -o hello -static
+//查看详情
+&gt; gcc hello.c -o hello -static --verbose
+
+    可以看出编译背后使用了cc1，as，collect2 三个命令
+    cc1 是gcc的编译器 产生=》 hello.s
+    as 是汇编器命令 =&gt; hello.o
+    collect2 是链接命令 =&gt;  可执行文件</code></pre><a id="more"></a><p><img src="/images/pasted-4.png" alt="c1"></p>
+<ul>
+<li><p>编译</p>
+</li>
+<li><blockquote>
+<p>gcc -E hello.c -o hello.i //预编译阶段</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>gcc -S hello.i -o hello.s //编译为汇编文件(<code>AT&amp;T格式</code>)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>汇编(预编译会引入elf.h) </p>
+</li>
+<li><blockquote>
+<p>gcc -c hello.s -o hello.o</p>
+</blockquote>
+</li>
+<li><blockquote>
+<p>readlef -a hello.h  //<code>查看elf文件内容与结构</code> </p>
+</blockquote>
+</li>
+<li><p>生成ELF文件</p>
+</li>
+<li><blockquote>
+<p>gcc hello.o -o hello</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><blockquote>
+<p>编译的过程就是翻译的过程</p>
+</blockquote>
+<p><img src="/images/pasted-5.png" alt="upload successful"></p>
+<pre><code>1.单词分析-&gt;n,adj,
+2.分析结构-&gt;主,谓,宾
+3.语法分析-&gt;xx从句
+4.翻译结果</code></pre><blockquote>
+<p>编译器流程</p>
+</blockquote>
+<ul>
+<li>1.词法分析</li>
+<li>2.语法分析</li>
+<li>3.语义分析</li>
+<li>4.中间代码生成器</li>
+<li>5.机器无关代码优化器</li>
+<li>6.目标代码生成器</li>
+<li>7.机器相关代码优化器</li>
+</ul>
+<h2 id="词法分析器"><a href="#词法分析器" class="headerlink" title="词法分析器"></a>词法分析器</h2><pre><code>从左往右，逐行扫描，确认每个单词的含义,类型
+token:&lt;种别码，属性值&gt;</code></pre><p><img src="/images/pasted-6.png" alt="c3">  </p>
+<pre><code>文法：
+
+G=({+,-,*,(,)}.{E},P,E)
+
+P={
+    E-&gt;E+E
+    E-&gt;E*E
+    E-&gt;(E)
+}
+
+G:  E-&gt;E+E
+    E-&gt;E*E
+    E-&gt;(E)
+以上可以表示无穷个句子
+    所以，文法解决了无穷语言的有穷的表答问题
+文法定义</code></pre><p><img src="/images/pasted-7.png" alt="c4"></p>
+<blockquote>
+<p>单元流</p>
+</blockquote>
+<blockquote>
+<p>有穷变换机</p>
+</blockquote>
+<h2 id="ELF是什么"><a href="#ELF是什么" class="headerlink" title="ELF是什么?"></a>ELF是什么?</h2><p>//todo</p>
+<h2 id="其他中间文件"><a href="#其他中间文件" class="headerlink" title="其他中间文件"></a>其他中间文件</h2><h2 id="有穷变换机"><a href="#有穷变换机" class="headerlink" title="有穷变换机"></a>有穷变换机</h2>
+    </div>
+
+    
+    
+    
+        
+      
+        <div id="reward-container">
+  <div></div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="blankqwq 微信支付">
+        <p>微信支付</p>
       </div>
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="blankqwq 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>blankqwq</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/" title="编写一个编译器（C语言子集）">http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
 
       
 
-  
-  
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/study/" rel="tag"># study</a>
+            
+              <a href="/tags/c/" rel="tag"># c</a>
+            
+          </div>
+        
 
-  
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/07/select和epoll的笔记/" rel="next" title="select和epoll的笔记">
+                  <i class="fa fa-chevron-left"></i> select和epoll的笔记
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
     
-    <div class="collection-year">
-      <h1 class="collection-header">2019</h1>
-    </div>
-  
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/09/22/Tp-3-2-运行分析/" itemprop="url">
-            <span itemprop="name">Tp 3.2 运行分析 1 初步认识篇</span>
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-09-22T11:06:00+08:00"
-              content="2019-09-22">
-          09-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    </div>
   </div>
   
   
   
+  </article>
 
-  
-
+  </div>
 
 
           </div>
@@ -350,6 +547,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -362,6 +564,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言运行流程"><span class="nav-text">C语言运行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译过程"><span class="nav-text">编译过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器"><span class="nav-text">词法分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELF是什么"><span class="nav-text">ELF是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他中间文件"><span class="nav-text">其他中间文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有穷变换机"><span class="nav-text">有穷变换机</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
