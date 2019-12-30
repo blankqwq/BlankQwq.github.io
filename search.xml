@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[贝叶斯定理]]></title>
+    <url>%2F2019%2F12%2F30%2F%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86%2F</url>
+    <content type="text"><![CDATA[公式论证 1）要求解的问题：女神喜欢你，记为A事件 2）已知条件：女神经常冲你笑，记为B事件 所以说，P(A|B) 是女神经常冲你笑这个事件(B)发生后，女神喜欢你（A）的概率。 在B的情况下发生A的概率 我 们把P(A)称为&apos;先验概率&apos;（Prior probability）， 即在不知道B事件的前提下 我们对A事件概率的一个主观判断。 这个例子里就是在不知道女神经常对你笑的前提下 来主观判断出女 神喜欢一个人的概率 这里我们假设是50% 也就是不能喜欢你 可能不喜欢还你的概率都是一半。 P(B|A)/P(B)称为&apos;可能性函数&apos;（Likelyhood）， 这是一个调整因子，即新信息B带来的调整， 作用是使得先验概率更接近真实概率。 P(A|B)称为&apos;后验概率&apos;（Posterior probability），即在B事件发生之后， 我们对A事件概率的重新评估 这个例子里就是在女神冲你笑后 对女神喜欢你的概率重新预测。 预测结果 女神经常冲你笑，喜欢上你的概率是75%。 女神经常冲你笑这个新信息的推断能力很强， 将50%的&apos;先验概率&apos;一下子提高到了75%的&apos;后验概率&apos;。 朴素贝叶斯: p(A|B) =p(A) * p(B|A)/p(B) 条件独立形式 相关性表示 如果&apos;可能性函数&apos;P(B|A)/P(B)&gt;1， 意味着&apos;先验概率&apos;被增强，事件A的发生的可能性变大； 如果&apos;可能性函数&apos;=1， 意味着B事件无助于判断事件A的可能性； 如果&quot;可能性函数&quot;&lt;1， 意味着&quot;先验概率&quot;被削弱 事件A的可能性变小 多概率事件表示 X = x1 + x2 =1 比如:从盒子1中中间或者从盒子2中中奖 x1 = x2 =0.5 B:中奖事件 p(B) = p(x1)*p(B|x1) + p(x2) * p(B|x2) P(x1|B) = p(B) * p(B|x1)/p(x1) 朴素贝叶斯定理 与 大脑决策过程对比 朴素贝叶斯 1234graph LR先验概率--&gt;贝叶斯定理可能性函数--&gt;贝叶斯定理贝叶斯定理--&gt;a(后验概率) 大脑决策 1234graph LR主关判断--&gt;大脑收集新信息--&gt;大脑大脑--&gt;a(优化判断)]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>数学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[编写一个编译器（C语言子集）]]></title>
     <url>%2F2019%2F11%2F02%2F%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%BC%96%E8%AF%91%E5%99%A8%EF%BC%88C%E8%AF%AD%E8%A8%80%E5%AD%90%E9%9B%86%EF%BC%89%2F</url>
     <content type="text"><![CDATA[C语言运行流程//静态链接编译hello.c &gt; gcc hello.c -o hello -static //查看详情 &gt; gcc hello.c -o hello -static --verbose 可以看出编译背后使用了cc1，as，collect2 三个命令 cc1 是gcc的编译器 产生=》 hello.s as 是汇编器命令 =&gt; hello.o collect2 是链接命令 =&gt; 可执行文件 编译 gcc -E hello.c -o hello.i //预编译阶段 gcc -S hello.i -o hello.s //编译为汇编文件(AT&amp;T格式) 汇编(预编译会引入elf.h) gcc -c hello.s -o hello.o readlef -a hello.h //查看elf文件内容与结构 生成ELF文件 gcc hello.o -o hello 编译过程 编译的过程就是翻译的过程 1.单词分析-&gt;n,adj, 2.分析结构-&gt;主,谓,宾 3.语法分析-&gt;xx从句 4.翻译结果 编译器流程 1.词法分析 2.语法分析 3.语义分析 4.中间代码生成器 5.机器无关代码优化器 6.目标代码生成器 7.机器相关代码优化器 词法分析器从左往右，逐行扫描，确认每个单词的含义,类型 token:&lt;种别码，属性值&gt; 文法： G=({+,-,*,(,)}.{E},P,E) P={ E-&gt;E+E E-&gt;E*E E-&gt;(E) } G: E-&gt;E+E E-&gt;E*E E-&gt;(E) 以上可以表示无穷个句子 所以，文法解决了无穷语言的有穷的表答问题 文法定义 单元流 有穷变换机 ELF是什么?//todo 其他中间文件有穷变换机]]></content>
