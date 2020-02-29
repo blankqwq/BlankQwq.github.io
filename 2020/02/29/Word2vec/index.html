@@ -64,24 +64,24 @@
   };
 </script>
 
-  <meta name="description" content="C语言运行流程//静态链接编译hello.c &amp;gt; gcc hello.c -o hello -static //查看详情 &amp;gt; gcc hello.c -o hello -static --verbose      可以看出编译背后使用了cc1，as，collect2 三个命令     cc1 是gcc的编译器 产生=》 hello.s     as 是汇编器命令 =&amp;gt; hello">
-<meta name="keywords" content="study,c">
+  <meta name="description" content="TF-IDF 关键词权重">
+<meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编写一个编译器（C语言子集）">
-<meta property="og:url" content="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/index.html">
+<meta property="og:title" content="Word2vec">
+<meta property="og:url" content="http://yoursite.com/2020/02/29/Word2vec/index.html">
 <meta property="og:site_name" content="blankqwq">
-<meta property="og:description" content="C语言运行流程//静态链接编译hello.c &amp;gt; gcc hello.c -o hello -static //查看详情 &amp;gt; gcc hello.c -o hello -static --verbose      可以看出编译背后使用了cc1，as，collect2 三个命令     cc1 是gcc的编译器 产生=》 hello.s     as 是汇编器命令 =&amp;gt; hello">
+<meta property="og:description" content="TF-IDF 关键词权重">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/pasted-4.png">
-<meta property="og:image" content="http://yoursite.com/images/pasted-5.png">
-<meta property="og:image" content="http://yoursite.com/images/pasted-6.png">
-<meta property="og:image" content="http://yoursite.com/images/pasted-7.png">
-<meta property="og:updated_time" content="2019-11-02T12:42:27.356Z">
+<meta property="og:image" content="http://yoursite.com/images/image-20200229140051300.png">
+<meta property="og:image" content="http://yoursite.com/images/image-20200229140237940.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-8.png">
+<meta property="og:image" content="http://yoursite.com/images/image-20200229140320938.png">
+<meta property="og:updated_time" content="2020-02-29T07:02:54.721Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编写一个编译器（C语言子集）">
-<meta name="twitter:description" content="C语言运行流程//静态链接编译hello.c &amp;gt; gcc hello.c -o hello -static //查看详情 &amp;gt; gcc hello.c -o hello -static --verbose      可以看出编译背后使用了cc1，as，collect2 三个命令     cc1 是gcc的编译器 产生=》 hello.s     as 是汇编器命令 =&amp;gt; hello">
-<meta name="twitter:image" content="http://yoursite.com/images/pasted-4.png">
-  <link rel="canonical" href="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/">
+<meta name="twitter:title" content="Word2vec">
+<meta name="twitter:description" content="TF-IDF 关键词权重">
+<meta name="twitter:image" content="http://yoursite.com/images/image-20200229140051300.png">
+  <link rel="canonical" href="http://yoursite.com/2020/02/29/Word2vec/">
 
 
 <script id="page-configurations">
@@ -95,7 +95,7 @@
   };
 </script>
 
-  <title>编写一个编译器（C语言子集） | blankqwq</title>
+  <title>Word2vec | blankqwq</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/29/Word2vec/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="blankqwq">
@@ -285,7 +285,7 @@
       <meta itemprop="name" content="blankqwq">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">编写一个编译器（C语言子集）
+        <h1 class="post-title" itemprop="name headline">Word2vec
 
           
         </h1>
@@ -301,36 +301,16 @@
                 
               
 
-              <time title="创建时间：2019-11-02 20:39:00 / 修改时间：20:42:27" itemprop="dateCreated datePublished" datetime="2019-11-02T20:39:00+08:00">2019-11-02</time>
+              <time title="创建时间：2020-02-29 13:54:00 / 修改时间：15:02:54" itemprop="dateCreated datePublished" datetime="2020-02-29T13:54:00+08:00">2020-02-29</time>
             </span>
           
             
 
             
           
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编译器/" itemprop="url" rel="index"><span itemprop="name">编译器</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/编译器/gcc/" itemprop="url" rel="index"><span itemprop="name">gcc</span></a></span>
-
-                
-                
-              
-            </span>
-          
 
           
-            <span id="/2019/11/02/编写一个编译器（C语言子集）/" class="post-meta-item leancloud_visitors" data-flag-title="编写一个编译器（C语言子集）" title="阅读次数">
+            <span id="/2020/02/29/Word2vec/" class="post-meta-item leancloud_visitors" data-flag-title="Word2vec" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -345,7 +325,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
           
 
@@ -358,90 +338,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="C语言运行流程"><a href="#C语言运行流程" class="headerlink" title="C语言运行流程"></a>C语言运行流程</h2><pre><code>//静态链接编译hello.c
-&gt; gcc hello.c -o hello -static
-//查看详情
-&gt; gcc hello.c -o hello -static --verbose
-
-    可以看出编译背后使用了cc1，as，collect2 三个命令
-    cc1 是gcc的编译器 产生=》 hello.s
-    as 是汇编器命令 =&gt; hello.o
-    collect2 是链接命令 =&gt;  可执行文件</code></pre><a id="more"></a><p><img src="/images/pasted-4.png" alt="c1"></p>
-<ul>
-<li><p>编译</p>
-</li>
-<li><blockquote>
-<p>gcc -E hello.c -o hello.i //预编译阶段</p>
+        <h2 id="TF-IDF-关键词权重"><a href="#TF-IDF-关键词权重" class="headerlink" title="TF-IDF 关键词权重"></a><code>TF-IDF</code> 关键词权重</h2><a id="more"></a><pre><code>TF: Term Frequency,衡量-个term在文档中出现得有多频繁
+TF(t) = (t出现在文档中的次数) / (文档中的term总数)
+IDF: Inverse Document Frequency,衡量一个term有多重要。
+IDF(t) = log_ e(文档总数/含有t的文档总数).</code></pre><blockquote>
+<p>TF-IDF = TF * IDF </p>
 </blockquote>
-<ul>
-<li><blockquote>
-<p>gcc -S hello.i -o hello.s //编译为汇编文件(<code>AT&amp;T格式</code>)</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>汇编(预编译会引入elf.h) </p>
-</li>
-<li><blockquote>
-<p>gcc -c hello.s -o hello.o</p>
-</blockquote>
-</li>
-<li><blockquote>
-<p>readlef -a hello.h  //<code>查看elf文件内容与结构</code> </p>
-</blockquote>
-</li>
-<li><p>生成ELF文件</p>
-</li>
-<li><blockquote>
-<p>gcc hello.o -o hello</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><blockquote>
-<p>编译的过程就是翻译的过程</p>
-</blockquote>
-<p><img src="/images/pasted-5.png" alt="upload successful"></p>
-<pre><code>1.单词分析-&gt;n,adj,
-2.分析结构-&gt;主,谓,宾
-3.语法分析-&gt;xx从句
-4.翻译结果</code></pre><blockquote>
-<p>编译器流程</p>
-</blockquote>
-<ul>
-<li>1.词法分析</li>
-<li>2.语法分析</li>
-<li>3.语义分析</li>
-<li>4.中间代码生成器</li>
-<li>5.机器无关代码优化器</li>
-<li>6.目标代码生成器</li>
-<li>7.机器相关代码优化器</li>
-</ul>
-<h2 id="词法分析器"><a href="#词法分析器" class="headerlink" title="词法分析器"></a>词法分析器</h2><pre><code>从左往右，逐行扫描，确认每个单词的含义,类型
-token:&lt;种别码，属性值&gt;</code></pre><p><img src="/images/pasted-6.png" alt="c3">  </p>
-<pre><code>文法：
-
-G=({+,-,*,(,)}.{E},P,E)
-
-P={
-    E-&gt;E+E
-    E-&gt;E*E
-    E-&gt;(E)
-}
-
-G:  E-&gt;E+E
-    E-&gt;E*E
-    E-&gt;(E)
-以上可以表示无穷个句子
-    所以，文法解决了无穷语言的有穷的表答问题
-文法定义</code></pre><p><img src="/images/pasted-7.png" alt="c4"></p>
-<blockquote>
-<p>单元流</p>
+<p>但是”的”这个词在大部分语句中非常多但却不是关键性词语,所以我们需要排除掉一些<strong>停止词</strong></p>
+<pre><code>Stopwords
+    停顿词
+    https://www.ranks.nl/stopwords/chinese-stopwords</code></pre><p><img src="/images/image-20200229140051300.png" alt="image-20200229140051300"></p>
+<h2 id="什么是word2vec"><a href="#什么是word2vec" class="headerlink" title="什么是word2vec"></a>什么是word2vec</h2><blockquote>
+<p>把某个词语转换为向量的形式,并且有一定的相关性</p>
 </blockquote>
 <blockquote>
-<p>有穷变换机</p>
+<p>先来了解一下<code>One-Hot</code>编码</p>
 </blockquote>
-<h2 id="ELF是什么"><a href="#ELF是什么" class="headerlink" title="ELF是什么?"></a>ELF是什么?</h2><p>//todo</p>
-<h2 id="其他中间文件"><a href="#其他中间文件" class="headerlink" title="其他中间文件"></a>其他中间文件</h2><h2 id="有穷变换机"><a href="#有穷变换机" class="headerlink" title="有穷变换机"></a>有穷变换机</h2>
+<pre><code>    [&apos;男&apos;,&apos;女&apos;]
+ [&apos;北京&apos;,&apos;广州&apos;,成都]
+ [&apos;江西&apos;,&apos;湖南&apos;,&apos;湖北&apos;,&apos;四川&apos;]
+   feature1=[01,10]
+   feature2=[001,010,100]
+   feature3=[0001,0010,0100,1000]
+ 某句话分词以后所拥有的词语的向量
+   不考虑相关性,词语太多维度就越大
+一是解决了分类器不好处理离散数据的问题
+二是在一定程度上也起到了扩充特征的作用。</code></pre><blockquote>
+<p>Dristributed representation可以解决One hot representation的问题，它的思路是将每个词都映射到一个较短的词向量上来。所有的这些词向量就构成了向量空间，进而可以用普通的统计学的方法来研究词与词之间的关系</p>
+</blockquote>
+<p><img src="/images/image-20200229140237940.png" alt="image-20200229140237940"><br><img src="/images/pasted-8.png" alt="pasted-8"></p>
+<blockquote>
+<p><code>word2vec</code>有两种算法</p>
+</blockquote>
+<p><img src="/images/image-20200229140320938.png" alt="image-20200229140320938"></p>
+<pre><code>CBow
+可=&gt;可以
+Skip-Gram
+以=&gt;可
+◆Word2Vec不足
+    使用了唯- - -的词向量对于多义词没有很好的效果
+    context很小没有使用全局的cooccur对cooccur的利用少局限</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引入解压包</span></span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="comment"># 引入gensim 使用其中Word2Vec训练</span></span><br><span class="line"><span class="keyword">import</span> gensim</span><br><span class="line"><span class="comment"># 引入日志模块</span></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="comment"># 设置日志等级</span></span><br><span class="line">logging.basicConfig(format=<span class="string">""</span>,level=logging.INFO)</span><br><span class="line"><span class="comment"># 设置压缩包名称</span></span><br><span class="line">file_name = <span class="string">"reviews_data.txt.gz"</span></span><br><span class="line"><span class="comment"># rb方式打开压缩包</span></span><br><span class="line"><span class="keyword">with</span> gzip.open (file_name,<span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">        print(line)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 文件读入列表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">input_file</span><span class="params">(file_name)</span>:</span></span><br><span class="line">    logging.info(<span class="string">"read &#123;0&#125; file spend ... a while"</span>.format(file_name))</span><br><span class="line">    <span class="keyword">with</span> gzip.open (file_name,<span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i,line <span class="keyword">in</span> enumerate(f):</span><br><span class="line">            <span class="keyword">if</span>(i%<span class="number">10000</span>==<span class="number">0</span>):</span><br><span class="line">                <span class="comment"># 1w行提醒</span></span><br><span class="line">                logging.info(<span class="string">"read &#123;0&#125; ...  "</span>.format(i))</span><br><span class="line">            <span class="comment"># 生成器准备行</span></span><br><span class="line">            <span class="keyword">yield</span>  gensim.utils.simple_preprocess(line)</span><br><span class="line">            <span class="keyword">del</span> line</span><br><span class="line"> <span class="comment"># 转换为列表</span></span><br><span class="line">document = list(input_file(file_name))</span><br><span class="line">logging.info(<span class="string">"done ..."</span>)</span><br><span class="line"><span class="comment"># 实例化Word2Vec对象</span></span><br><span class="line">model = gensim.models.Word2Vec(document,size=<span class="number">100</span>,window=<span class="number">10</span>,min_count=<span class="number">2</span>,workers=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 开始训练</span></span><br><span class="line">model.train(document,total_examples=len(document),epochs=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 测试结果,查找与meet意思相近的词语</span></span><br><span class="line">model.wv.most_similar(positive=<span class="string">"meet"</span>)</span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line"><span class="comment"># [('impress', 0.6027274131774902),</span></span><br><span class="line"><span class="comment">#  ('entertain', 0.5958169102668762),</span></span><br><span class="line"><span class="comment">#  ('accommodate', 0.5741552114486694),</span></span><br><span class="line"><span class="comment">#  ('socialize', 0.5670729875564575),</span></span><br><span class="line"><span class="comment">#  ('assist', 0.56257164478302),</span></span><br><span class="line"><span class="comment">#  ('met', 0.5540478229522705),</span></span><br><span class="line"><span class="comment">#  ('live', 0.5432528257369995),</span></span><br><span class="line"><span class="comment">#  ('chat', 0.5394443273544312),</span></span><br><span class="line"><span class="comment">#  ('accomadate', 0.5350830554962158),</span></span><br><span class="line"><span class="comment">#  ('accomodate', 0.5346274375915527)]</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -480,7 +416,7 @@ G:  E-&gt;E+E
     <strong>本文作者： </strong>blankqwq</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/" title="编写一个编译器（C语言子集）">http://yoursite.com/2019/11/02/编写一个编译器（C语言子集）/</a>
+    <a href="http://yoursite.com/2020/02/29/Word2vec/" title="Word2vec">http://yoursite.com/2020/02/29/Word2vec/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -495,9 +431,7 @@ G:  E-&gt;E+E
           
           <div class="post-tags">
             
-              <a href="/tags/study/" rel="tag"># study</a>
-            
-              <a href="/tags/c/" rel="tag"># c</a>
+              <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
             
           </div>
         
@@ -507,8 +441,8 @@ G:  E-&gt;E+E
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/07/select和epoll的笔记/" rel="next" title="select和epoll的笔记">
-                  <i class="fa fa-chevron-left"></i> select和epoll的笔记
+                <a href="/2019/12/30/贝叶斯定理/" rel="next" title="贝叶斯定理">
+                  <i class="fa fa-chevron-left"></i> 贝叶斯定理
                 </a>
               
             </div>
@@ -516,10 +450,6 @@ G:  E-&gt;E+E
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/12/30/贝叶斯定理/" rel="prev" title="贝叶斯定理">
-                  贝叶斯定理 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -568,7 +498,7 @@ G:  E-&gt;E+E
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言运行流程"><span class="nav-text">C语言运行流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译过程"><span class="nav-text">编译过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器"><span class="nav-text">词法分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELF是什么"><span class="nav-text">ELF是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他中间文件"><span class="nav-text">其他中间文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有穷变换机"><span class="nav-text">有穷变换机</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TF-IDF-关键词权重"><span class="nav-text">TF-IDF 关键词权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是word2vec"><span class="nav-text">什么是word2vec</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
